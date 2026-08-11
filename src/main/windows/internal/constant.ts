@@ -1,0 +1,1 @@
+export const MAC_TRAFFIC_LIGHT_EXPANDED_POSITION = { x: 16, y: 16 };
