@@ -7,3 +7,5 @@ export function AppHeader(props: PropsWithChildren): React.JSX.Element {
     </header>
   );
 }
+
+export default AppHeader;
