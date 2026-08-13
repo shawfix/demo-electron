@@ -1,3 +1,4 @@
+import { is } from '@electron-toolkit/utils';
 import { BrowserWindow, shell } from 'electron';
 
 import { MAC_TRAFFIC_LIGHT_EXPANDED_POSITION } from './internal/constant';
@@ -7,10 +8,9 @@ import { mainWindowConfig } from './internal/config';
 
 let mainWindowPtr: BrowserWindow | null = null;
 
-// TODO: Add logger
 export function createMainWindow(): BrowserWindow {
   // Config
-  const { preload, loadFile } = mainWindowConfig;
+  const { preload, loadFile, loadURL } = mainWindowConfig;
 
   // Options
   const autoHideMenuBar = !isWindows; // Windows 平台下不自动隐藏菜单栏，避免用户误操作
@@ -48,7 +48,11 @@ export function createMainWindow(): BrowserWindow {
     return { action: 'deny' };
   });
 
-  mainWindow.loadFile(loadFile);
+  if (is.dev && loadURL) {
+    mainWindow.loadURL(loadURL);
+  } else {
+    mainWindow.loadFile(loadFile);
+  }
 
   mainWindowPtr = mainWindow;
   return mainWindow;

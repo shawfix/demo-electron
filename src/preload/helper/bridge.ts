@@ -1,6 +1,5 @@
 import { contextBridge } from 'electron';
 
-// TODO: Add logger
 export function createBridge(apiKey: string, api: Record<string, any> = {}) {
   api['__bridge_name__'] = apiKey;
 
