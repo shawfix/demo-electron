@@ -6,6 +6,16 @@
   font-weight: normal;
 }
 
+:root {
+  --traffic-light-area-height: 38px;
+  --traffic-light-area-width: 84px;
+
+  --app-header-height: var(--traffic-light-area-height);
+  --app-header-pl: var(--traffic-light-area-width);
+
+  --app-content-height: calc(100vh - var(--app-header-height));
+}
+
 ul {
   list-style: none;
 }
@@ -27,13 +37,21 @@ body {
     'Helvetica Neue',
     sans-serif;
   text-rendering: optimizeLegibility;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 #root {
   height: 100%;
   width: 100%;
   min-height: 100vh;
+}
+
+.app-header {
+  -webkit-app-region: drag;
+}
+/* 标题栏内的按钮要排除 */
+.app-header button {
+  -webkit-app-region: no-drag;
 }
