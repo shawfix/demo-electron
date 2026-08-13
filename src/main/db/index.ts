@@ -10,7 +10,6 @@ import * as schema from './schema';
 import { test } from './schema';
 import { DBLogger } from '../logger/db-logger';
 
-// TODO: Add logger
 export function initDB() {
   try {
     const sqlite3 = new DataBase(join(app.getPath('userData'), 'app.db'));
@@ -26,6 +25,7 @@ export function initDB() {
   } catch (error) {
     DBLogger.error('%cError occurred while initializing the database', 'color: red');
     DBLogger.error(error);
+    return void 0;
   }
 }
 
