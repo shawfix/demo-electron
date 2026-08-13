@@ -1,4 +1,7 @@
+import { NavLink } from 'react-router-dom';
 import { useTheme } from 'next-themes';
+
+import { routerPath } from '@renderer/router';
 
 const THEME_LABELS: Record<string, string> = {
   light: '明亮',
@@ -129,6 +132,10 @@ function Themes(): React.JSX.Element {
           </div>
         </div>
       </section>
+
+      <NavLink to={routerPath.index}>
+        <button className="btn bg-white text-black border-[#e5e5e5]">To HOME</button>
+      </NavLink>
     </>
   );
 }
