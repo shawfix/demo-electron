@@ -27,9 +27,9 @@ export function createLogger(options: { logId: string; scope: string }): typeof 
   logger.transports.console.level = consoleLevel ?? 'info';
 
   logger.info(`%cLogger initialized successfully`, 'color: green');
-  logger.info(`logId:\t${options.logId}`);
-  logger.info(`scope:\t${options.scope}`);
-  logger.info(`path:\t${path}`);
+  logger.info(`logId: ${options.logId}`);
+  logger.info(`scope: ${options.scope}`);
+  logger.info(`path: ${path}`);
 
   return logger;
 }
