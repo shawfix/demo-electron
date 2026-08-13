@@ -21,8 +21,10 @@ export function createMainWindow(): BrowserWindow {
   const scrollBounce = isMac ? true : false;
 
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1440,
+    height: 870,
+    minWidth: 900,
+    minHeight: 670,
     show: false,
     autoHideMenuBar: autoHideMenuBar,
     backgroundColor: '#ffffff',
