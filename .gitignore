@@ -12,3 +12,7 @@ out
 # typescript
 tsconfig.node.json
 tsconfig.web.json
+
+
+# drizzle
+drizzle

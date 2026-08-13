@@ -1,6 +1,7 @@
-import { electronApp, optimizer } from '@electron-toolkit/utils';
+import { electronApp, is, optimizer } from '@electron-toolkit/utils';
 import { app, BrowserWindow, ipcMain } from 'electron';
 
+import { initDB, testDB } from './db';
 import { MainLogger } from './logger/main-logger';
 import { createMainWindow } from './windows/main-window';
 
@@ -12,6 +13,8 @@ app
   .then(() => {
     // Set app user model id for windows
     electronApp.setAppUserModelId('com.electron');
+
+    const db = initDB();
 
     // IPC test
     ipcMain.on('ping', () => MainLogger.info('%cIPC connection test', 'color: blue'));
@@ -30,9 +33,15 @@ app
     });
 
     createMainWindow();
+
+    if (is.dev) {
+      runTest(db);
+    }
+
+    MainLogger.info('%cApp started successfully', 'color: green');
   })
   .catch((error) => {
-    MainLogger.error('%cRun APP occurs error', 'color: red');
+    MainLogger.error('%cError occurred while running the app', 'color: red');
     MainLogger.error(error);
   });
 
@@ -47,5 +56,10 @@ app.on('window-all-closed', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+/**
+ * 测试
+ * @param db
+ */
+function runTest(db: ReturnType<typeof initDB>) {
+  testDB(db);
+}

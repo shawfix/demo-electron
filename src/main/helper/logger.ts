@@ -17,6 +17,7 @@ export function createLogger(options: { logId: string; scope: string }): typeof 
   const logger = log.create({ logId: options.logId });
 
   logger.scope.defaultLabel = options.scope;
+  logger.scope.labelPadding = 8;
 
   logger.transports.file.level = fileLevel ?? 'info';
   logger.transports.file.maxSize = (fileMaxSize ?? 'info') * 1024 * 1024;
@@ -25,10 +26,10 @@ export function createLogger(options: { logId: string; scope: string }): typeof 
   logger.transports.console.format = `[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] {scope} {text}`;
   logger.transports.console.level = consoleLevel ?? 'info';
 
-  logger.info(`%cLogger initialized`, 'color: green');
+  logger.info(`%cLogger initialized successfully`, 'color: green');
   logger.info(`logId:\t${options.logId}`);
   logger.info(`scope:\t${options.scope}`);
-  logger.info(`path:\t\t${path}`);
+  logger.info(`path:\t${path}`);
 
   return logger;
 }
