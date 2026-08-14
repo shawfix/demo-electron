@@ -20,7 +20,7 @@ export function createLogger(options: { logId: string; scope: string }): typeof 
   logger.scope.labelPadding = 8;
 
   logger.transports.file.level = fileLevel ?? 'info';
-  logger.transports.file.maxSize = (fileMaxSize ?? 'info') * 1024 * 1024;
+  logger.transports.file.maxSize = (fileMaxSize ?? 1) * 1024 * 1024;
   logger.transports.file.resolvePathFn = (_) => path;
 
   logger.transports.console.format = `[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] {scope} {text}`;
