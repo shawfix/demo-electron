@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useTheme } from 'next-themes';
 
+import PageTransition from '@renderer/components/transition/PageTransition';
 import { routerPath } from '@renderer/router';
 
 const THEME_LABELS: Record<string, string> = {
@@ -16,7 +17,7 @@ function Themes(): React.JSX.Element {
   const currentLabel = THEME_LABELS[theme ?? 'light'] ?? theme;
 
   return (
-    <>
+    <PageTransition className="page-themes">
       <section className="card w-full bg-base-100 shadow-md">
         <div className="card-body gap-5">
           <div className="flex items-center justify-between">
@@ -136,7 +137,7 @@ function Themes(): React.JSX.Element {
       <NavLink to={routerPath.index}>
         <button className="btn bg-white text-black border-[#e5e5e5]">To HOME</button>
       </NavLink>
-    </>
+    </PageTransition>
   );
 }
 

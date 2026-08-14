@@ -1,10 +1,6 @@
-import { lazy } from 'react';
 import { createHashRouter } from 'react-router-dom';
 
 import AppLayout from '@renderer/components/layout/AppLayout';
-
-const Themes = lazy(() => import('@renderer/pages/themes'));
-const Workbench = lazy(() => import('@renderer/pages/workbench'));
 
 export const routerPath = {
   index: '/',
@@ -18,11 +14,17 @@ export const router = createHashRouter([
     children: [
       {
         index: true,
-        element: <Workbench />
+        lazy: async () => {
+          const { default: Component } = await import('@renderer/pages/workbench');
+          return { Component };
+        }
       },
       {
-        path: 'themes',
-        element: <Themes />
+        path: routerPath.themes,
+        lazy: async () => {
+          const { default: Component } = await import('@renderer/pages/themes');
+          return { Component };
+        }
       }
     ]
   }

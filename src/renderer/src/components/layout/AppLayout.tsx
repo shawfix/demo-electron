@@ -1,18 +1,17 @@
-import { Suspense } from 'react';
+import { AnimatePresence } from 'motion/react';
 import { Outlet } from 'react-router-dom';
 
 import AppContent from './AppContent';
 import AppHeader from './AppHeader';
-import PageLoading from './PageLoading';
 
 function AppLayout(): React.JSX.Element {
   return (
     <>
       <AppHeader />
       <AppContent>
-        <Suspense fallback={<PageLoading />}>
-          <Outlet></Outlet>
-        </Suspense>
+        <AnimatePresence mode="wait">
+          <Outlet />
+        </AnimatePresence>
       </AppContent>
     </>
   );
