@@ -4,3 +4,34 @@
 @plugin 'daisyui' {
   themes: light --default, dark --prefersdark;
 }
+
+/* 旧画面层：关掉动画、静止当背景，否则看到的是默认交叉淡入淡出 */
+::view-transition-old(root) {
+  animation: none;
+}
+/* 新画面层：默认（即切到亮色后）播放「从下往上展开」动画 */
+::view-transition-new(root) {
+  animation: theme-turn-off 800ms ease-in-out;
+}
+/* 动画播放时 data-theme 已是新值，所以切到暗色时命中这条，播放「从上往下展开」 */
+[data-theme='dark']::view-transition-new(root) {
+  animation: theme-turn-on 800ms ease-in-out;
+}
+/* 从上往下展开：起始形状是塌在顶边的零高度线，终点是整屏，四个顶点一一对应、浏览器逐顶点插值 */
+@keyframes theme-turn-on {
+  0% {
+    clip-path: polygon(0% 0%, 100% 0, 100% 0, 0 0);
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0, 100% 100%, 0 100%);
+  }
+}
+/* 从下往上展开：起始形状是塌在底边的零高度线，终点是整屏 */
+@keyframes theme-turn-off {
+  0% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+  }
+}

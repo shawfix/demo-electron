@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { useTheme } from 'next-themes';
+import { flushSync } from 'react-dom';
 
 import PageTransition from '@renderer/components/transition/PageTransition';
 import { routerPath } from '@renderer/router';
+import { transitionViewIfSupported } from '@renderer/utils/viewTransition';
 
 const THEME_LABELS: Record<string, string> = {
   light: '明亮',
@@ -26,7 +28,12 @@ function Themes(): React.JSX.Element {
               <input
                 type="checkbox"
                 checked={theme === 'dark'}
-                onChange={(event): void => setTheme(event.target.checked ? 'dark' : 'light')}
+                onChange={(event): void =>
+                  transitionViewIfSupported(() => {
+                    // React 默认异步提交状态；不同步提交的话，视图过渡拍到的「切换后截图」还是旧主题
+                    flushSync(() => setTheme(event.target.checked ? 'dark' : 'light'));
+                  })
+                }
               />
               <svg
                 className="swap-on size-8 fill-current"
@@ -75,7 +82,10 @@ function Themes(): React.JSX.Element {
                   <a
                     className={name === theme ? 'active' : ''}
                     onClick={(event): void => {
-                      setTheme(name);
+                      transitionViewIfSupported(() => {
+                        // 同上：同步提交才能让新画面快照拍到新主题
+                        flushSync(() => setTheme(name));
+                      });
                       event.currentTarget.blur();
                     }}
                   >

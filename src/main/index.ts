@@ -60,6 +60,6 @@ app.on('window-all-closed', () => {
  * 测试
  * @param db
  */
-function runTest(db: ReturnType<typeof initDB>) {
+function runTest(db: ReturnType<typeof initDB>): void {
   testDB(db);
 }

@@ -4,13 +4,14 @@ import { app } from 'electron';
 
 import DataBase from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
+import type { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
 
 import * as schema from './schema';
 import { test } from './schema';
 import { DBLogger } from '../logger/db-logger';
 
-export function initDB() {
+export function initDB(): BetterSQLite3Database<typeof schema> | undefined {
   try {
     const sqlite3 = new DataBase(join(app.getPath('userData'), 'app.db'));
     // 提升并发读写性能
@@ -29,7 +30,7 @@ export function initDB() {
   }
 }
 
-export function testDB(db: ReturnType<typeof initDB>) {
+export function testDB(db: ReturnType<typeof initDB>): void {
   try {
     const inserted = db!.insert(test).values({}).returning().get();
     DBLogger.info('Inserted row: %o', inserted);

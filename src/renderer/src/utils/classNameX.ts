@@ -14,7 +14,7 @@ export function classNameX(...params: ClassNameXParam[]): string {
       if (typeof item === 'object') {
         Object.keys(item)
           .map((key) => {
-            if (!!item[key]) {
+            if (item[key]) {
               return key;
             }
 

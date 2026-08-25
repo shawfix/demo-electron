@@ -6,8 +6,6 @@ import { MAC_TRAFFIC_LIGHT_EXPANDED_POSITION } from './internal/constant';
 import { isMac, isWindows } from '../helper/platform';
 import { mainWindowConfig } from './internal/config';
 
-let mainWindowPtr: BrowserWindow | null = null;
-
 export function createMainWindow(): BrowserWindow {
   // Config
   const { preload, loadFile, loadURL } = mainWindowConfig;
@@ -56,6 +54,5 @@ export function createMainWindow(): BrowserWindow {
     mainWindow.loadFile(loadFile);
   }
 
-  mainWindowPtr = mainWindow;
   return mainWindow;
 }

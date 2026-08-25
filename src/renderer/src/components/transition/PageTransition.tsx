@@ -1,4 +1,4 @@
-import { classNameX } from '@renderer/utils/classNamex';
+import { classNameX } from '@renderer/utils/classNameX';
 import { motion } from 'motion/react';
 import { PropsWithChildren } from 'react';
 

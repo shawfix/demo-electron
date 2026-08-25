@@ -9,7 +9,7 @@ const prettier = {
   ...eslintConfigPrettier,
   rules: {
     ...eslintConfigPrettier.rules,
-    semi: [],
+    semi: 'off',
     'no-console': 'off',
     'no-unused-vars': 'off'
   }
@@ -39,12 +39,6 @@ export default defineConfig(
     }
   },
   {
-    ...eslintConfigPrettier,
-    rules: {
-      ...eslintConfigPrettier.rules,
-      semi: [],
-      'no-console': 'off',
-      'no-unused-vars': 'off'
-    }
+    ...prettier
   }
 );

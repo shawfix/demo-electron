@@ -1,5 +1,4 @@
 import { sql } from 'drizzle-orm';
-import { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 import { integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 
 export const test = sqliteTable('test', {
