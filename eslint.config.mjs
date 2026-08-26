@@ -4,6 +4,7 @@ import eslintConfigPrettier from '@electron-toolkit/eslint-config-prettier';
 import eslintPluginReact from 'eslint-plugin-react';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import eslintPluginReactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginPerfectionist from 'eslint-plugin-perfectionist';
 
 const prettier = {
   ...eslintConfigPrettier,
@@ -36,6 +37,34 @@ export default defineConfig(
     rules: {
       ...eslintPluginReactHooks.configs.recommended.rules,
       ...eslintPluginReactRefresh.configs.vite.rules
+    }
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: { perfectionist: eslintPluginPerfectionist },
+    rules: {
+      'perfectionist/sort-imports': [
+        'error',
+        {
+          type: 'alphabetical',
+          order: 'asc',
+          ignoreCase: true,
+          sortBy: 'path',
+          newlinesBetween: 1,
+          newlinesInside: 0,
+          sortSideEffects: true,
+          internalPattern: ['^@renderer/.+'],
+          partitionByComment: 'sort-partition',
+          groups: [
+            ['side-effect', 'side-effect-style'],
+            'builtin',
+            'external',
+            'internal',
+            ['parent', 'sibling', 'index'],
+            'unknown'
+          ]
+        }
+      ]
     }
   },
   {
