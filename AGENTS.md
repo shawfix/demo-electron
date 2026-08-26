@@ -20,6 +20,8 @@ demo-electron：Electron 桌面应用，pnpm 管理。
 - 遵循现有 ESLint（含 react-hooks、react-refresh）与 Prettier（单引号、分号、行宽 100、无尾逗号）
 - 组件文件 PascalCase，工具文件 camelCase，页面目录小写 + `index.tsx`；统一函数组件 + Hooks
 - 禁止 `any`，必须显式类型；确无法收窄时附中文注释并加 `eslint-disable`
+- 渲染进程访问系统能力一律经 preload 桥接（`createBridge` / contextBridge），不直连 Node API
+- 仅渲染层使用的依赖装 `devDependencies`；主进程运行时依赖必须装 `dependencies`（electron-builder 只打包 `dependencies`）
 - 行尾符统一 LF：`.gitattributes`（`* text=auto eol=lf`）+ Prettier `endOfLine: lf` + `.editorconfig` 三层约束
 - 提交前 `pnpm lint` 与 `pnpm typecheck` 必须通过
 
@@ -45,7 +47,7 @@ docs/[module]/                    # 如 docs/posts、docs/dashboard
 ├── plans/[feature].md            # 计划：方向、拆阶段、风险
 └── specs/[feature]/
     ├── spec.md                   # 需求、架构、边界、影响范围
-    ├── tasks.md                  # 任务拆解、依赖顺序、TDD 步骤
+    ├── tasks.md                  # 任务拆解、依赖顺序、执行步骤
     ├── checklist.md              # 验收清单
     └── 技术方案.md                # 评审与归档的正式方案
 ```
@@ -60,7 +62,7 @@ docs/[module]/                    # 如 docs/posts、docs/dashboard
    - 小 bug/小样式/小文案：直接对话处理，必要时补测试用例
 3. 拆分结果告知用户，由用户决定流程
 4. 按单个 task 实现，完成后按修改顺序列出变动文件及改动内容供 review，确认后更新 task 状态
-5. 全部完成后执行测试，更新 `checklist.md`；用户最终确认后更新 `技术方案.md`、`index.md`、`CHANGELOG.md`
+5. 全部完成后执行验证（测试框架就绪前以 `pnpm typecheck`、`pnpm lint` 及 `pnpm dev` 手动验证为准），更新 `checklist.md`；用户最终确认后更新 `技术方案.md`、`index.md`、`CHANGELOG.md`
 
 ### spec/plan/task/checklist 规范
 - `spec.md`：必须含结论、边界、影响范围、逐文件改动点、流程图、测试矩阵
@@ -90,5 +92,6 @@ docs/[module]/                    # 如 docs/posts、docs/dashboard
 
 ## 禁区
 - 不修改任务无关内容；不修改 `drizzle/` 迁移文件（自动生成且不入库）及 `out/`、`node_modules/`、`.eslintcache` 等产物
+- 不开启 `nodeIntegration`、不关闭 `contextIsolation` / `contextBridge`（Electron 安全红线）
 - 不手动编辑 `tsconfig.node.json` / `tsconfig.web.json`（脚手架生成）
 - 不升级大版本依赖；不在 `.env*` 中提交真实密钥
