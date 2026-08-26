@@ -2,7 +2,9 @@
 @import './base.css';
 
 @plugin 'daisyui' {
-  themes: light --default, dark --prefersdark;
+  themes:
+    light --default,
+    dark --prefersdark;
 }
 
 /* 旧画面层：关掉动画、静止当背景，否则看到的是默认交叉淡入淡出 */

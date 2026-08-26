@@ -8,10 +8,7 @@ import { transitionViewIfSupported } from '@renderer/utils/viewTransition';
 
 const THEME_LABELS: Record<string, string> = {
   light: '明亮',
-  dark: '暗黑',
-  cupcake: '纸杯蛋糕',
-  synthwave: '合成波',
-  forest: '森林'
+  dark: '暗黑'
 };
 
 function Themes(): React.JSX.Element {
@@ -145,7 +142,7 @@ function Themes(): React.JSX.Element {
       </section>
 
       <NavLink to={routerPath.index}>
-        <button className="btn bg-white text-black border-[#e5e5e5]">To HOME</button>
+        <button className="btn btn-outline">To HOME</button>
       </NavLink>
     </PageTransition>
   );

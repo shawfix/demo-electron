@@ -1,0 +1,7 @@
+# 统一行尾符：仓库内文本文件一律 LF，不受各开发者 core.autocrlf 设置影响
+* text=auto eol=lf
+
+# 二进制文件不参与行尾符处理
+*.png binary
+*.ico binary
+*.icns binary
