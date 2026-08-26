@@ -16,3 +16,10 @@ tsconfig.web.json
 
 # drizzle
 drizzle
+
+
+# plan/spec
+docs/*/**/plans/
+docs/*/**/checklist.md
+docs/*/**/spec.md
+docs/*/**/tasks.md
