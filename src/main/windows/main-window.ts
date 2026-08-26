@@ -1,10 +1,9 @@
 import { is } from '@electron-toolkit/utils';
 import { BrowserWindow, shell } from 'electron';
 
-import { MAC_TRAFFIC_LIGHT_EXPANDED_POSITION } from './internal/constant';
-
 import { isMac, isWindows } from '../helper/platform';
 import { mainWindowConfig } from './internal/config';
+import { MAC_TRAFFIC_LIGHT_EXPANDED_POSITION } from './internal/constant';
 
 export function createMainWindow(): BrowserWindow {
   // Config

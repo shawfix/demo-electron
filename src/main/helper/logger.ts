@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 
-import { app } from 'electron/main';
 import log from 'electron-log/main';
+import { app } from 'electron/main';
 
 const fileLevel = import.meta.env['VITE_LOG_FILE_LEVEL'];
 const fileMaxSize = import.meta.env['VITE_LOG_FILE_MAX_SIZE'];

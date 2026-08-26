@@ -1,6 +1,5 @@
-import { createBridge } from '../helper/bridge';
-
 import { isLinux, isMac, isWindows } from '../../main/helper/platform';
+import { createBridge } from '../helper/bridge';
 
 createBridge('platform', {
   isLinux: isLinux,

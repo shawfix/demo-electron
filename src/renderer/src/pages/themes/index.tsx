@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom';
 import { useTheme } from 'next-themes';
 import { flushSync } from 'react-dom';
+import { NavLink } from 'react-router-dom';
 
-import PageTransition from '@renderer/components/transition/PageTransition';
+import { BottomToUpTransitionView } from '@renderer/components/transition/BottomToUpTransitionView';
 import { routerPath } from '@renderer/router';
 import { transitionViewIfSupported } from '@renderer/utils/viewTransition';
 
@@ -16,7 +16,7 @@ function Themes(): React.JSX.Element {
   const currentLabel = THEME_LABELS[theme ?? 'light'] ?? theme;
 
   return (
-    <PageTransition className="page-themes">
+    <BottomToUpTransitionView className="page-themes h-full w-full">
       <section className="card w-full bg-base-100 shadow-md">
         <div className="card-body gap-5">
           <div className="flex items-center justify-between">
@@ -144,7 +144,7 @@ function Themes(): React.JSX.Element {
       <NavLink to={routerPath.index}>
         <button className="btn btn-outline">To HOME</button>
       </NavLink>
-    </PageTransition>
+    </BottomToUpTransitionView>
   );
 }
 

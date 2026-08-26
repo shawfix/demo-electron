@@ -1,15 +1,14 @@
 import { join } from 'node:path';
 
-import { app } from 'electron';
-
 import DataBase from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import type { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
+import { app } from 'electron';
 
+import { DBLogger } from '../logger/db-logger';
 import * as schema from './schema';
 import { test } from './schema';
-import { DBLogger } from '../logger/db-logger';
 
 export function initDB(): BetterSQLite3Database<typeof schema> | undefined {
   try {

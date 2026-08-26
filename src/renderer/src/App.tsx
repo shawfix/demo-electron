@@ -1,9 +1,14 @@
+import { domAnimation, LazyMotion } from 'motion/react';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from './router';
 
 function App(): React.JSX.Element {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <LazyMotion features={domAnimation}>
+      <RouterProvider router={router}></RouterProvider>
+    </LazyMotion>
+  );
 }
 
 export default App;

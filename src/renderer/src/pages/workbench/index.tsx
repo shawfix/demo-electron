@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom';
 
+import { BottomToUpTransitionView } from '@renderer/components/transition/BottomToUpTransitionView';
 import { routerPath } from '@renderer/router';
-import PageTransition from '@renderer/components/transition/PageTransition';
 
 function Workbench(): React.JSX.Element {
   return (
-    <PageTransition className="page-workbench">
+    <BottomToUpTransitionView className="page-workbench h-full w-full">
       <NavLink to={routerPath.themes}>To Themes</NavLink>
-    </PageTransition>
+    </BottomToUpTransitionView>
   );
 }
 
