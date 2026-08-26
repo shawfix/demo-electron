@@ -40,20 +40,24 @@ demo-electron：Electron 桌面应用，pnpm 管理。
 - `.env`（基础）/ `.env.development` / `.env.production`
 - 仅 `VITE_` 前缀暴露给渲染进程；主进程/预加载用 `MAIN_VITE_` / `PRELOAD_VITE_` 前缀
 
-## docs 目录规范
-配合 `superpowers` 工作流存放 spec/plan 文档，按模块划分：
+## docs 与 wiki 目录规范
+配合 `superpowers` 工作流按模块划分：`docs` 存放过程文档（计划与规格），`wiki` 存放模块汇总与变更日志。本节「模块」特指业务功能模块（用户可见的业务功能，如 posts、dashboard），两侧模块名一一对应；工程规范类条目（如 import-order 导入排序规则）不属于业务模块，其文档只存放在 `docs/`（如 `docs/import-order/spec.md`），不建 `wiki` 对应目录：
 ```
-docs/[module]/                    # 如 docs/posts、docs/dashboard
-├── index.md                      # 功能汇总、业务流程图
-├── CHANGELOG.md                  # 变更日志
+docs/[module]/                    # 业务模块，如 docs/posts、docs/dashboard
 ├── plans/[feature].md            # 计划：方向、拆阶段、风险
 └── specs/[feature]/
     ├── spec.md                   # 需求、架构、边界、影响范围
     ├── tasks.md                  # 任务拆解、依赖顺序、执行步骤
     ├── checklist.md              # 验收清单
     └── 技术方案.md                # 评审与归档的正式方案
+
+wiki/[module]/                    # 仅业务模块，模块名与 docs 一一对应，如 wiki/posts、wiki/dashboard
+├── index.md                      # 功能汇总、业务流程图
+└── CHANGELOG.md                  # 变更日志
 ```
-- `CHANGELOG.md` 基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，每条变更末尾标注提交人 `(@用户名)`
+- `index.md`：维护该业务模块当前的功能汇总与业务流程图，每个功能落地后更新为最新状态
+- `CHANGELOG.md`：基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，每条变更末尾标注提交人 `(@用户名)`
+- 维护时机：单个业务功能的全部 task 完成并通过用户最终确认后，同步创建或更新对应 `wiki/[module]/index.md` 与 `wiki/[module]/CHANGELOG.md`；文件或目录不存在时先创建
 
 ## 开发流程
 1. 以模块为需求单位：先分析需求、拆分模块
@@ -64,7 +68,7 @@ docs/[module]/                    # 如 docs/posts、docs/dashboard
    - 小 bug/小样式/小文案：直接对话处理，必要时补测试用例
 3. 拆分结果告知用户，由用户决定流程
 4. 按单个 task 实现，完成后按修改顺序列出变动文件及改动内容供 review，确认后更新 task 状态
-5. 全部完成后执行验证（测试框架就绪前以 `pnpm typecheck`、`pnpm lint` 及 `pnpm dev` 手动验证为准），更新 `checklist.md`；用户最终确认后更新 `技术方案.md`、`index.md`、`CHANGELOG.md`
+5. 全部完成后执行验证（测试框架就绪前以 `pnpm typecheck`、`pnpm lint` 及 `pnpm dev` 手动验证为准），更新 `checklist.md`；用户最终确认后更新 `技术方案.md`、`wiki/[module]/index.md`、`wiki/[module]/CHANGELOG.md`
 
 ### spec/plan/task/checklist 规范
 - `spec.md`：必须含结论、边界、影响范围、逐文件改动点、流程图、测试矩阵
