@@ -62,7 +62,7 @@ wiki/[module]/                    # 仅业务模块，模块名与 docs 一一�
 ## 开发流程
 1. 以模块为需求单位：先分析需求、拆分模块
 2. 按工作量或故事点分级选流程：
-   - 大功能/大迁移/跨系统：拆需求后分多个 SDD 闭环，产出多组 plan/spec/tasks/checklist
+   - 大功能/大迁移/跨系统：拆需求后分多个 SDD 闭环，产出多组 spec/plan/tasks/checklist
    - 架构影响/复杂链路/用户可见功能：单个 SDD 闭环，产出 spec/plan/tasks/checklist
    - 小功能/轻量重构：仅 tasks/checklist
    - 小 bug/小样式/小文案：直接对话处理，必要时补测试用例
@@ -70,8 +70,9 @@ wiki/[module]/                    # 仅业务模块，模块名与 docs 一一�
 4. 按单个 task 实现，完成后按修改顺序列出变动文件及改动内容供 review，确认后更新 task 状态
 5. 全部完成后执行验证（测试框架就绪前以 `pnpm typecheck`、`pnpm lint` 及 `pnpm dev` 手动验证为准），更新 `checklist.md`；用户最终确认后更新 `技术方案.md`、`wiki/[module]/index.md`、`wiki/[module]/CHANGELOG.md`
 
-### spec/plan/task/checklist 规范
+### spec/plan/task/checklist/技术方案 规范
 - `spec.md`：必须含结论、边界、影响范围、逐文件改动点、流程图、测试矩阵
+- `plan.md`：明确系统架构、技术栈、组件职责、数据模型、API契约、安全与可观测性、异常处理与降级方案
 - `tasks.md`：把需求拆成可执行工作流，task → subTask 逐级拆分，明确依赖顺序，全部可勾选
 - `checklist.md`：写成验收标准，不是 TODO 清单
 - `技术方案.md`：按模板重组，服务评审、测试、维护与归档
