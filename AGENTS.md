@@ -67,7 +67,7 @@ wiki/[module]/                    # 仅业务模块，模块名与 docs 一一�
    - 小功能/轻量重构：仅 tasks/checklist
    - 小 bug/小样式/小文案：直接对话处理，必要时补测试用例
 3. 拆分结果告知用户，由用户决定流程
-4. 按单个 task 实现，完成后按修改顺序列出变动文件及改动内容供 review，确认后更新 task 状态
+4. 按单个 task 实现，完成后按修改顺序列出变动文件及改动内容供 review；用户确认后再执行 git 提交，提交后更新 task 状态
 5. 全部完成后执行验证（测试框架就绪前以 `pnpm typecheck`、`pnpm lint` 及 `pnpm dev` 手动验证为准），更新 `checklist.md`；用户最终确认后更新 `技术方案.md`、`wiki/[module]/index.md`、`wiki/[module]/CHANGELOG.md`
 
 ### spec/plan/task/checklist/技术方案 规范
